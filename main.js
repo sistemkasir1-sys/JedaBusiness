@@ -4,13 +4,14 @@ import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from
 import { getDatabase, ref, onValue, set, push, get } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  databaseURL: "YOUR_DB_URL",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MSG_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyCr0qjNHlaZw-pGJ4oSf5M_5lbF38mrD6U",
+  authDomain: "jedabusiness-9a170.firebaseapp.com",
+  databaseURL: "https://jedabusiness-9a170-default-rtdb.firebaseio.com",
+  projectId: "jedabusiness-9a170",
+  storageBucket: "jedabusiness-9a170.firebasestorage.app",
+  messagingSenderId: "446268971019",
+  appId: "1:446268971019:web:5a975f06ac5e7a8ec50f0e",
+  measurementId: "G-X04RVV9K30"
 };
 
 const app = initializeApp(firebaseConfig);
