@@ -1,7 +1,19 @@
 // Konfigurasi Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import { getDatabase, ref, onValue, set, push, get } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+import { 
+  getAuth, 
+  signInWithEmailAndPassword, 
+  signOut, 
+  onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import { 
+  getDatabase, 
+  ref, 
+  onValue, 
+  set, 
+  push, 
+  get 
+} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCr0qjNHlaZw-pGJ4oSf5M_5lbF38mrD6U",
@@ -27,46 +39,57 @@ const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const loginError = document.getElementById('login-error');
 
+// Email admin
+const ADMIN_EMAIL = "shysondiamond@gmail.com";
+
+// Fungsi login
 loginBtn.addEventListener('click', async () => {
-  const email = emailInput.value;
-  const password = passwordInput.value;
+  const email = emailInput.value.trim();
+  const password = passwordInput.value.trim();
+
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
-    const userRef = ref(db, 'users/' + user.uid);
-    const snapshot = await get(userRef);
-    if (snapshot.exists()) {
-      const data = snapshot.val();
-      if (data.role === 'admin') {
-        showPage('admin');
-      } else {
-        showPage('kasir');
-      }
+
+    // Tentukan role berdasarkan email
+    if (user.email === ADMIN_EMAIL) {
+      showPage('admin');
+    } else {
+      showPage('kasir');
     }
+
   } catch (error) {
     loginError.textContent = 'Login gagal: ' + error.message;
   }
 });
 
+// Fungsi untuk menampilkan halaman sesuai role
 function showPage(role) {
+  // Sembunyikan semua halaman
   loginPage.classList.add('hidden');
   adminDashboard.classList.add('hidden');
   kasirPage.classList.add('hidden');
-  if (role === 'admin') adminDashboard.classList.add('active');
-  if (role === 'kasir') kasirPage.classList.add('active');
+
+  // Tampilkan sesuai role
+  if (role === 'admin') {
+    adminDashboard.classList.remove('hidden');
+    adminDashboard.classList.add('active');
+  } else if (role === 'kasir') {
+    kasirPage.classList.remove('hidden');
+    kasirPage.classList.add('active');
+  }
 }
 
+// Pantau status login user
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    const userRef = ref(db, 'users/' + user.uid);
-    get(userRef).then(snapshot => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        if (data.role === 'admin') showPage('admin');
-        else showPage('kasir');
-      }
-    });
+    if (user.email === ADMIN_EMAIL) {
+      showPage('admin');
+    } else {
+      showPage('kasir');
+    }
   } else {
+    loginPage.classList.remove('hidden');
     loginPage.classList.add('active');
   }
 });
