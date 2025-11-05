@@ -1,0 +1,33 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+.page {
+  display: none;
+  text-align: center;
+  padding: 20px;
+}
+.page.active {
+  display: block;
+}
+button {
+  background: #6B4226;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+button:hover {
+  opacity: 0.9;
+}
+input {
+  display: block;
+  margin: 10px auto;
+  padding: 8px;
+  width: 80%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafe POS - Firebase Realtime</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="main.js" defer></script>
+</head>
+<body>
+  <div id="app">
+    <div id="login-page" class="page active">
+      <h2>☕ Cafe POS Login</h2>
+      <input id="email" type="email" placeholder="Email">
+      <input id="password" type="password" placeholder="Password">
+      <button id="login-btn">Login</button>
+      <p id="login-error"></p>
+    </div>
+    <div id="admin-dashboard" class="page hidden">
+      <h2>Dashboard Admin</h2>
+      <div id="stats">
+        <p>Pendapatan Kotor: <span id="pendapatanKotor">0</span></p>
+        <p>Modal (HPP): <span id="totalHPP">0</span></p>
+        <p>Laba Bersih: <span id="labaBersih">0</span></p>
+      </div>
+      <button id="logout">Logout</button>
+    </div>
+    <div id="kasir-page" class="page hidden">
+      <h2>Kasir</h2>
+      <div id="produk-list"></div>
+      <div id="transaksi"></div>
+      <button id="logoutKasir">Logout</button>
+    </div>
+  </div>
+</body>
+</html>
